@@ -1,5 +1,7 @@
 # beampage - Gaussian optics dashboard
 
+[![Build Status](https://app.travis-ci.com/hwikmark/beampage.svg?branch=main)](https://app.travis-ci.com/hwikmark/beampage)
+
 A small utility to play with [Gaussian beam optics](https://en.wikipedia.org/wiki/Gaussian_beam) and build systems such as telescopes. Uses Plotly Dash for the presentation.
 
 ![A screenshot of the app](assets/screenshot.png)
