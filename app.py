@@ -134,7 +134,7 @@ init_waist = float(default_settings['waist'])
 use_logfile = True
 
 if use_logfile:
-    os.makedirs('aux', exist_ok = True)
+    os.makedirs('aux', exist_ok=True)
     logfile_name = 'aux/logfile.txt'
     logfile = open(logfile_name, 'w')
     nowstr = datetime.now().isoformat(timespec='seconds', sep=' ')
