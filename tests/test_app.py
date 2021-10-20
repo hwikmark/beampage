@@ -40,6 +40,14 @@ class TestGaussian:
         w_z, show_lenses, report_text = app.calc_gaussian(settings, optics)
         assert min(w_z) == pytest.approx(0.01273, 0.001)
 
+    def test_change_wavelength(self):
+        optics = pd.read_csv(io.StringIO(simple_optics))
+        settings = test_settings
+        w_z_800, show_lenses, report_text = app.calc_gaussian(settings, optics)
+        settings['wavelength'] = 400
+        w_z_400, show_lenses, report_text = app.calc_gaussian(settings, optics)
+        assert min(w_z_800) == pytest.approx(2 * min(w_z_400))
+
     def test_where_focus(self):
         optics = pd.read_csv(io.StringIO(simple_optics))
         settings = test_settings
