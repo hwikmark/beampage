@@ -29,6 +29,7 @@ A small utility to play with [Gaussian beam optics](https://en.wikipedia.org/wik
 * Improve layout... a lot.
 
 ### Misc
+* Refactor code a bit more - would be nice to really separate the "optics" from the "app".
 * Add tests, CI, etc.
 
 ## Uses
