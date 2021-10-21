@@ -103,6 +103,7 @@ def calc_gaussian(settings, optical_elements):
                                                 z_grid[start_index] > 0 else
                                                 'before', waist)
         if rayleigh < 10000:
+            # Let's say it's collimated if R0 is over 10 m (kind of arbitrary)
             report_text += exva.report_rayleigh.format(
                 2 * rayleigh)
         else:
@@ -194,6 +195,8 @@ if use_password:
         app,
         VALID_USERNAME_PASSWORD_PAIRS
     )
+
+# Layout should maybe be broken out to its own file for clarity
 
 app.layout = html.Div([
     dcc.Tabs(id="all-tabs-inline", value='tab-1', children=[
@@ -460,6 +463,10 @@ def update_settings(clicks, xscale, yscale, wl, waist, zmin, zmax, zstep,
 def move_lenses(posvalue, focal, load_clicks, make_clicks, compressed_optics,
                 load_numclicks, make_numclicks, load_text, which_one,
                 compressed_settings):
+    # There's a lot of acrobatics around the "clicks" and "numclicks"
+    # which just keeps track of whether a button has been pressed
+    # since last time we ran this.
+
     optics = pd.read_json(compressed_optics)
     settings = json.loads(compressed_settings)
     l_clicks = int(load_numclicks)
@@ -479,7 +486,6 @@ def move_lenses(posvalue, focal, load_clicks, make_clicks, compressed_optics,
             optics['Element'] = optics.index
     elif m_clicks != old_make_clicks:
         last_place = float(last_optic['Position'])
-        last_index = last_optic.index
         new_optic = pd.DataFrame({
             'Type': [1],
             'Position': [last_place+10],
